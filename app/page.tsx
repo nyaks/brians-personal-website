@@ -115,6 +115,12 @@ export default function Home() {
             <div>
               <p className="mb-2 dark:text-stone-300 text-black">projects...</p>
               <ul className="list-disc list-inside text-sm dark:text-stone-400 text-black space-y-1">
+                <li>
+                  <a href="https://endless-wiki.vercel.app/" target="_blank" rel="noopener noreferrer" className="dark:text-stone-400 text-black underline hover:dark:text-stone-100 hover:text-black font-minecraft inline-block transform transition-transform duration-200 hover:scale-110">
+                    endless wiki:
+                  </a>
+                  <a> An encyclopedia where every word is a link. Click any word to dive deeper into an endless chain of knowledge.</a>
+                </li>
                 
               </ul>
             </div>
