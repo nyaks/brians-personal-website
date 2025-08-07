@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function Home() {
   // Typewriter effect state
@@ -160,7 +161,7 @@ export default function Home() {
               rel="noopener noreferrer"
               className="dark:text-stone-400 text-black underline hover:dark:text-stone-100 hover:text-black font-minecraft inline-block transform transition-transform duration-200 hover:scale-110 group"
             >
-              <img src="/substack.png" alt="Substack" className="inline w-4 h-4 mr-1 group-hover:scale-110 transition-transform duration-200" />
+              <Image src="/substack.png" alt="Substack" width={16} height={16} className="inline w-4 h-4 mr-1 group-hover:scale-110 transition-transform duration-200" />
               here
             </a>
           </p>

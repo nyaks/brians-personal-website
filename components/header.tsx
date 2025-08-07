@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -28,10 +29,13 @@ export default function Header() {
               }`}
             aria-label="Home"
           >
-            <img
+            <Image
               src="/ghcat.png"
               alt="Brian Barongo"
+              width={32}
+              height={32}
               className="h-8 w-auto rounded-sm transition-transform duration-200 group-hover:scale-125"
+              priority
             />
           </Link>
           <span className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 text-xs rounded bg-secondary text-secondary-foreground opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 whitespace-nowrap">

@@ -18,6 +18,26 @@ const nextConfig = {
   },
   // Generate a fully static site for Cloudflare Pages
   output: 'export',
+  // Ensure folder-style routes ("/about/" -> "/about/index.html") work on static hosts like GitHub Pages
+  trailingSlash: true,
+  // Automatically set basePath and assetPrefix when building on GitHub Actions for GitHub Pages project sites
+  // This avoids hardcoding the repository name
+  ...(process.env.GITHUB_ACTIONS === 'true'
+    ? (() => {
+        const repo = process.env.GITHUB_REPOSITORY?.split('/')?.[1]
+        if (!repo) return {}
+        // If this is a user/organization site like username.github.io, do not set basePath
+        const isUserSite = /\.github\.io$/i.test(repo)
+        if (isUserSite) {
+          return {}
+        }
+        const projectBase = `/${repo}`
+        return {
+          basePath: projectBase,
+          assetPrefix: projectBase,
+        }
+      })()
+    : {}),
   experimental: {
     webpackBuildWorker: true,
     parallelServerBuildTraces: true,
