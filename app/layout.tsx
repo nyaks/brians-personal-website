@@ -40,11 +40,13 @@ export default function RootLayout({
         <body
           className={`min-h-screen antialiased font-minecraft`}
         >
-          {/* Google Analytics Script */}
-          <Script
-            strategy="afterInteractive"
-            src=""
-          />
+          {/* Google Analytics Script (disabled if no ID provided) */}
+          {process.env.NEXT_PUBLIC_GA_ID ? (
+            <Script
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+            />
+          ) : null}
           <Script
             id="google-analytics-init"
             strategy="afterInteractive"
@@ -53,7 +55,7 @@ export default function RootLayout({
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', 'G-J6HJSY8DQ4', {
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID ?? ''}', {
                   page_path: window.location.pathname,
                 });
               `,
