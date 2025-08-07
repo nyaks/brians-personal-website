@@ -1,3 +1,5 @@
+import fs from 'node:fs'
+
 let userConfig = undefined
 try {
   userConfig = await import('./v0-user-next.config')
@@ -24,11 +26,14 @@ const nextConfig = {
   // This avoids hardcoding the repository name
   ...(process.env.GITHUB_ACTIONS === 'true'
     ? (() => {
+        // On GitHub Pages, only set basePath for project sites WITHOUT a custom domain
         const repo = process.env.GITHUB_REPOSITORY?.split('/')?.[1]
         if (!repo) return {}
-        // If this is a user/organization site like username.github.io, do not set basePath
         const isUserSite = /\.github\.io$/i.test(repo)
-        if (isUserSite) {
+        // Detect custom domain by presence of CNAME file at repo root
+        const hasCustomDomain = fs.existsSync('./CNAME')
+        if (isUserSite || hasCustomDomain) {
+          // Serve from domain root
           return {}
         }
         const projectBase = `/${repo}`
